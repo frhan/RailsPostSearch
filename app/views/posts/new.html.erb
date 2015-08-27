@@ -1,2 +1,8 @@
 <h1>Posts#new</h1>
 <p>Find me in app/views/posts/new.html.erb</p>
+
+<%= form_for @post, html: {class: "nifty_form"} do |f| %>
+    <%= f.text_field :title %>
+    <%= f.text_area :desc, size: "60x12" %>
+    <%= f.submit "Create" %>
+<% end %>
