@@ -11,12 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827111824) do
+ActiveRecord::Schema.define(version: 20150911071943) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "categories_posts", id: false, force: :cascade do |t|
+    t.integer "post_id",     limit: 4, null: false
+    t.integer "category_id", limit: 4, null: false
   end
 
   create_table "locations", force: :cascade do |t|
@@ -27,12 +32,16 @@ ActiveRecord::Schema.define(version: 20150827111824) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.text     "desc",       limit: 65535
-    t.decimal  "price",                    precision: 10
-    t.string   "image",      limit: 255
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "title",       limit: 255
+    t.text     "desc",        limit: 65535
+    t.decimal  "price",                     precision: 10
+    t.string   "image",       limit: 255
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "location_id", limit: 4
   end
 
+  add_index "posts", ["location_id"], name: "index_posts_on_location_id", using: :btree
+
+  add_foreign_key "posts", "locations"
 end
