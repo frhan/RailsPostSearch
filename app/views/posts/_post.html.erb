@@ -1,0 +1,17 @@
+<div class="col-sm-12 col-md-12 thumbnail">
+  <div class="thumbnail">
+    <%= image_tag post.image %>
+  </div>
+  <div class="caption">
+    <h3><%= post.title %></h3>
+    <p><%= post.desc %>></p>
+
+    <p>
+    <label><%= post.location.name %></label>
+      <label> Category: </label>
+      <% post.categories.each do |category|%>
+          <label><%= category.name %></label>
+      <% end %>
+    </p>
+  </div>
+</div>
