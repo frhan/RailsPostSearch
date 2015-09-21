@@ -6,7 +6,6 @@
 getParameters = ->
   query = window.location.search.substring(1)
   raw_vars = query.split("&")
-
   params = {}
 
   for v in raw_vars
