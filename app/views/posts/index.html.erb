@@ -26,7 +26,7 @@
           <% @posts.response.response['facets']['categories']['terms'].each do |c|  %>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" value="<%= c.id %>"><%= "#{c['term'].capitalize()}(#{ c['count']})" %>
+                  <input type="checkbox" value="<%= c['term'] %>"><%= "#{c['term'].capitalize()}(#{ c['count']})" %>
                 </label>
               </div>
           <% end %>
@@ -42,7 +42,7 @@
           <% @posts.response.response['facets']['location']['terms'].each do |l| %>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" value="<%= l.id %>"><%= "#{ l['term'].capitalize()}(#{ l['count']})" %>
+                  <input type="checkbox" value="<%= l['term'] %>"><%= "#{ l['term'].capitalize()}(#{ l['count']})" %>
                 </label>
               </div>
           <% end %>
@@ -61,11 +61,7 @@
 
     <div class="col-md-9 posts-content">
       <%= paginate @posts,:remote => false %>
-      <div class="row">
-        <% @posts.each do |post| %>
-            <%= render partial: 'post',object: post %>
-        <% end %>
-      </div>
+      <%= render partial: "post", collection: @posts  %>
       <%= paginate @posts %>
     </div>
   </div>

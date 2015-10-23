@@ -11,6 +11,7 @@ getParameters = ->
   for v in raw_vars
     [key,val] = v.split("=")
     params[key] = decodeURIComponent(val)
+  console.log(params)
   params
 
 checkFilters = (selector,filters) ->
@@ -27,11 +28,11 @@ ready = ->
 
   parameters = getParameters()
   console.log('caeded')
-  if parameters.category_ids?
-    for category in parameters.category_ids.split(',')
+  if parameters.category?
+    for category in parameters.category.split(' ')
       filters.categories.push(category)
   if parameters.locations?
-    for location in parameters.locations.split(',')
+    for location in parameters.locations.split(' ')
       filters.locations.push(location)
 
   #check box
@@ -81,19 +82,19 @@ ready = ->
       query = ""
     url = full+"?query=" + query
 
+    #console.log(filters.categories)
+
     if filters?
       if filters.categories.length > 0
-        url = url + '&category_ids=' + filters.categories.join(',')
+        url = url + '&category=' + encodeURIComponent(filters.categories.join(' '))
       if filters.locations.length > 0
-        url = url + '&locations=' + filters.locations.join(',')
+        url = url + '&locations=' + encodeURIComponent(filters.locations.join(' '))
 
     #sort_by = $('#sort_by').val()
     #if sort_by.length > 0
     #url = url + "&sort_by=" + sort_by
 
     window.location.href = url
-
-
 
 $(document).ready(ready)
 $(document).on('page:load',ready)
