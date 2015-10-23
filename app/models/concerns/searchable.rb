@@ -70,10 +70,28 @@ module Searchable
                   terms: {
                       field: 'location.name'
                   },
-                  facet_filter: {}
+                  facet_filter: {
+
+                  }
               }
           }
       }
+
+
+
+      if options[:category]
+        f = { term: { "categories.name" => options[:category] } }
+
+        __set_filters.(:location, f)
+
+      end
+
+      if options[:location]
+        f = { term: { location: options[:location] } }
+
+        __set_filters.(:categories, f)
+      end
+
 
       unless query.blank?
         @search_definition[:query] = {
@@ -92,7 +110,7 @@ module Searchable
         @search_definition[:query] = { match_all: {} }
         #@search_definition[:sort]  = { published_on: 'desc' }
       end
-
+      puts @search_definition
       __elasticsearch__.search(@search_definition)
     end
 

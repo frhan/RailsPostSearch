@@ -29,10 +29,10 @@ ready = ->
   parameters = getParameters()
   console.log('caeded')
   if parameters.category?
-    for category in parameters.category.split(' ')
+    for category in parameters.category.split(',')
       filters.categories.push(category)
   if parameters.locations?
-    for location in parameters.locations.split(' ')
+    for location in parameters.locations.split(',')
       filters.locations.push(location)
 
   #check box
@@ -86,9 +86,9 @@ ready = ->
 
     if filters?
       if filters.categories.length > 0
-        url = url + '&category=' + encodeURIComponent(filters.categories.join(' '))
+        url = url + '&category=' + encodeURIComponent(filters.categories.join(','))
       if filters.locations.length > 0
-        url = url + '&locations=' + encodeURIComponent(filters.locations.join(' '))
+        url = url + '&locations=' + encodeURIComponent(filters.locations.join(','))
 
     #sort_by = $('#sort_by').val()
     #if sort_by.length > 0

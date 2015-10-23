@@ -61,7 +61,11 @@
 
     <div class="col-md-9 posts-content">
       <%= paginate @posts,:remote => false %>
-      <%= render partial: "post", collection: @posts  %>
+      <div class="row">
+        <% @posts.each do |post| %>
+            <%= render partial: 'post',object: post %>
+        <% end %>
+      </div>
       <%= paginate @posts %>
     </div>
   </div>

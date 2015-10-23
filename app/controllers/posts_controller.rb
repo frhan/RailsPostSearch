@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   def index
     options = {
         category: params[:category],
-        location: params[:location],
+        location: params[:locations],
         sort: params[:sort]
     }
     @posts = Post.search(params[:query],options).page(params[:page]).results
