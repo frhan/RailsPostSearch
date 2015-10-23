@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.page(params[:page])
+    options = {
+        category: params[:category],
+        location: params[:location],
+        sort: params[:sort]
+    }
+    @posts = Post.search(params[:query],options).page(params[:page]).results
   end
 
   def new
